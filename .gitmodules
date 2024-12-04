@@ -1,0 +1,3 @@
+[submodule "algorithms/llm-reasoners"]
+	path = algorithms/llm-reasoners
+	url = https://github.com/ajaye2/llm-reasoners
