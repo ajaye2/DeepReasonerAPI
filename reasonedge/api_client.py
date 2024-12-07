@@ -111,4 +111,4 @@ class DeepReasonerClient:
         Returns:
             dict: Reasoning results
         """
-        return self.post('/reason', {'prompt': prompt, 'temperature': temperature, 'algorithm': reasoning_algorithm}) 
+        return self.post('reason', {'prompt': prompt, 'temperature': temperature, 'algorithm': reasoning_algorithm}) 

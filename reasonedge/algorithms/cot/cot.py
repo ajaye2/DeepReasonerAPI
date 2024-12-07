@@ -2,6 +2,7 @@ from reasonedge.base import BaseReasoner
 from reasoners.lm import OpenAIModel
 from typing import Any, Dict, List, Optional, Union
 import time
+import re
 
 class ChainOfThoughtReasoner(BaseReasoner):
     """
@@ -70,7 +71,7 @@ class ChainOfThoughtReasoner(BaseReasoner):
             start_time=start_time,
             temperature=temperature
         )
-    
+
     def _extract_reasoning_steps(self, raw_response: str) -> List[str]:
         """
         Extract individual reasoning steps from the raw response.
@@ -87,12 +88,19 @@ class ChainOfThoughtReasoner(BaseReasoner):
         # Split the response by newlines and filter out empty lines
         lines = [line.strip() for line in raw_response.split('\n') if line.strip()]
         
-        # Extract steps that start with "Step X:" or "Answer:"
         steps = []
         for line in lines:
-            if line.lower().startswith('step ') or line.lower().startswith('answer:'):
-                steps.append(line)
-            elif not steps and line:  # Include non-empty lines if no steps found yet
-                steps.append(line)
-                
+            # Remove leading "- " or "* " bullet if present
+            normalized_line = re.sub(r"^[\-\*\•]\s*", "", line)
+            
+            # Check if the normalized line is a step or an answer line
+            # Match formats like "Step 1:", "Step 2:", ignoring case, and allowing some spacing
+            if re.match(r"(?i)^step\s*\d+\:", normalized_line):
+                steps.append(normalized_line)
+            elif re.match(r"(?i)^answer:", normalized_line):
+                steps.append(normalized_line)
+            # If we haven't found any steps yet, still capture the line as a starting point
+            elif not steps and normalized_line:
+                steps.append(normalized_line)
+        
         return steps
