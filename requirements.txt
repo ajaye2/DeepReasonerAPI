@@ -6,3 +6,4 @@ azure-identity==1.19.0
 openai
 requests
 python-dotenv
+requests>=2.31.0

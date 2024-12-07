@@ -8,10 +8,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y git && apt-get clean
 
 # Copy the setup script, requirements file, and Gunicorn configuration
-COPY setup_dependencies.sh requirements.txt gunicorn.conf.py ./
-
-# Copy the submodule
-COPY algorithms/llm-reasoners ./algorithms/llm-reasoners
+COPY setup_dependencies.sh requirements.txt gunicorn.conf.py setup.py ./
 
 # Make the setup script executable
 RUN chmod +x setup_dependencies.sh
