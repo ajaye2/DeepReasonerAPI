@@ -16,6 +16,9 @@ setup(
         "azure-core==1.32.0",
         "azure-identity==1.19.0",
         "requests",
+        "langchain",
+        "chainlit",
+        "pydantic==2.10.1"
     ],
     author="Abubakarr Jaye",
     description="A Deep Reasoning library with multiple reasoning algorithms",

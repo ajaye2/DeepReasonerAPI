@@ -50,6 +50,7 @@ class ChainOfThoughtReasoner(BaseReasoner):
                         Each step should be a list item, with "Step X:" as the prefix, e.g. "Step 1: ..."
                         After each reasoning step, output a newline character.
                         When you have finished your reasoning, provide your final answer as a list item, with "Answer:" as the prefix, e.g. "Answer: ..."
+                        Always think before you answer.
                         """
         
         # Generate response from the model

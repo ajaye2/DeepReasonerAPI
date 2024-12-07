@@ -7,3 +7,6 @@ openai
 requests
 python-dotenv
 requests>=2.31.0
+langchain
+chainlit
+pydantic==2.10.1
